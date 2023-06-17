@@ -1,61 +1,31 @@
-const tableBody = document.getElementById('gitHubUserTableBody')
-const loadings = document.getElementById('Loading')
-const box = document.getElementById('box')
-const xMArk = document.querySelector('.fa-x')
+import {randomuserAPI} from './fetchService.js';
+import { usersTableBody,modal,closeButton } from './helpers.js';
 
-const handleRenderTable = (data) => {
-    data.forEach(element => {
-        tableBody.style.cursor = 'pointer'
-        tableBody.style.textAlign = 'center'
-            tableBody.innerHTML += `
-            <tr>
-                <td class = "id">${element.id}</td>      
-                <td class = "login">${element.login}</td> 
-                <td class = "type">${element.type}</td>
-                <td><a href ="${element.followers_url}"> Followers </td>
-            </tr>
-            `
-             const login = document.querySelector('.login')
-            login.addEventListener('click',function () {
-                box.style.display = 'block'
-            })
-            xMArk.addEventListener('click',function () {
-                xMArk.style.transform = 'rotate 180deg'
-                 setTimeout(() => {
-                    box.style.display = 'none'
-                 },1000) 
-            })
-            // box.innerHTML = `${element.login} ${element.id} ${element.type}`
-            
+// users table functional
 
+( async () => {
+    const {results,info} = await randomuserAPI.get('?results=10')
+    results.forEach(element => {
+        const {id,name,location} = element;
+
+        usersTableBody.innerHTML += `
+            <tr class = "${id.name}">
+                <td>${name.first} ${name.last}</td>
+                <td>${location.country}</td>
+            </tr>        
+        `
     });
-    
-}
+})();
 
-class ServiceAPI {
-    constructor (domain) {
-            this.domain = domain
-    }
-   async get() {
-    try {
-        const response =  await fetch(this.domain);
-        const data = response.json();
-        return data;
-    }
-    catch (data) {
-        console.log(data)
-    }
+( async () => {
+    usersTableBody.addEventListener('click',(event) => {
+        modal.style.display = 'block'
+        const tr = event.target.parentNode;
+        const userID = tr.getAttribute('class')
         
-}
-}
+    })
+})();
 
-const gitAPI = new ServiceAPI( 'https://api.github.com/users'); //
-gitAPI.get()
-.then((data) => {
-    setTimeout (() => {
-        handleRenderTable(data)
-        loadings.style.display = 'none'
-    },1500)
-    
-})
-const randomuserAPI = new ServiceAPI('https://randomuser.me/api/')
+closeButton.addEventListener('click',() => {
+    modal.style.display = 'none'
+});

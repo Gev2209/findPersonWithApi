@@ -8,26 +8,41 @@
     integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" 
     crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./styles/index.css">
     <title>Document</title>
 </head>
 <body>
-    <table width="100%" border="1" id="table">
-        <thead>
-            <tr class="tds">
-                <td id="id">id</td>
-                <td id="login">Login</td>
-                <td id="type">Type</td>
-                <td id="follow">Followers url</td>
-            </tr>
-        </thead>
+    <div id="myModal" class="modal">
 
-        <tbody id="gitHubUserTableBody">
+        <!-- Modal content -->
+        <div class="modal-content">
+          <div class="modal-header">
+            <span id="closeButonForCloseModal" class="close">&times;</span>
+            <h2>Modal Header</h2>
+          </div>
+          <div class="modal-body">
+            <p>Some text in the Modal Body</p>
+            <p>Some other text...</p>
+          </div>
+          <div class="modal-footer">
+            <h3>Modal Footer</h3>
+          </div>
+        </div>
+      
+      </div>
+    <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
+    <table id="myTable">
+        <thead>
+            <tr class="header">
+                <th style="width:60%;">Name</th>
+                <th style="width:40%;">Country</th>
+              </tr>
+        </thead>
+        
+        <tbody id="usersTableBody" >
+
         </tbody>
-    </table>
-    <div id="box">
-        <span><i class="fa-solid fa-x"></i></span>
-    </div>
-    <span id="Loading">Loading....</span>
-    <script src="./app.js"></script>
+      </table>
+    <script src="./js/app.js" type="module"></script>
 </body>
 </html>
