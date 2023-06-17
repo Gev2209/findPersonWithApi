@@ -1,6 +1,7 @@
 const tableBody = document.getElementById('gitHubUserTableBody')
 const loadings = document.getElementById('Loading')
-
+const box = document.getElementById('box')
+const xMArk = document.querySelector('.fa-x')
 
 const handleRenderTable = (data) => {
     data.forEach(element => {
@@ -8,13 +9,27 @@ const handleRenderTable = (data) => {
         tableBody.style.textAlign = 'center'
             tableBody.innerHTML += `
             <tr>
-                <td>${element.id}</td>
-                <td class = "login">${element.login}</td>
+                <td class = "id">${element.id}</td>      
+                <td class = "login">${element.login}</td> 
                 <td class = "type">${element.type}</td>
                 <td><a href ="${element.followers_url}"> Followers </td>
             </tr>
             `
+             const login = document.querySelector('.login')
+            login.addEventListener('click',function () {
+                box.style.display = 'block'
+            })
+            xMArk.addEventListener('click',function () {
+                xMArk.style.transform = 'rotate 180deg'
+                 setTimeout(() => {
+                    box.style.display = 'none'
+                 },1000) 
+            })
+            // box.innerHTML = `${element.login} ${element.id} ${element.type}`
+            
+
     });
+    
 }
 
 class ServiceAPI {
